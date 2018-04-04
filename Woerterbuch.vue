@@ -58,11 +58,7 @@
                     </a>
                 </div>
             </div>
-            <div class="woerterbuch__ergebnisse__scout">
 
-                <!-- AJAX-->
-
-            </div>
         </div>
         <!--LOADER-->
         <vue-loading-dots v-if="isSearching()"></vue-loading-dots>
@@ -98,7 +94,7 @@
         },
         methods: {
             /**
-             *
+             * Condition for loading animation
              */
             isSearching () {
             },
@@ -114,22 +110,18 @@
              * @param wort
              */
             viewVocab (wort) {
-                console.log(wort);
                 this.openModal(wort);
             },
             /**
              *
              * @param wort
              */
-            openModal(wort) {
+            openModal (wort) {
                 let ModalData = {
-                  title: 'Vokabelansicht: ' + wort.lemma,
-                  type: 'success',
-                  size: 'fullscreen',
-                    data: 'hohoho'
-/*
-                  uri: '/glossarium/' + wort.route_name + '/' + wort.id,
-*/
+                    title: 'Vokabelansicht: ' + wort.lemma,
+                    type: 'success',
+                    size: 'fullscreen',
+                    uri: '/glossarium/' + wort.route_name + '/' + wort.id,
                 };
                 EventBus.$emit('OpenModalEvent', JSON.stringify(ModalData));
             }
@@ -142,17 +134,6 @@
     /**
      *  SUCHKOMPONENTEN
      */
-    #ui_selected_vocab .selected_vocab_id {
-        display: inline-block;
-        color: #fff;
-        background: #B22E2F;
-        padding: 0.25rem 0.5rem;
-        margin: 0.25rem;
-    }
-
-    #ui_selected_vocab .selected_vocab_id .fa {
-        color: #fff;
-    }
 
     .woerterbuch {
         background: #fff;
@@ -192,7 +173,6 @@
         margin-bottom: 0;
     }
 
-
     .woerterbuch__suche--container {
         margin: auto;
     }
@@ -206,7 +186,6 @@
         box-shadow: inset 0 2px 5px 0 #ddd;
         border: 1px solid #ddd;
     }
-
 
     .woerterbuch__suche--radio-container input:checked + input:before {
         -webkit-transform: translateX(calc(100% - 1rem));
@@ -232,60 +211,26 @@
     }
 
     .woerterbuch__ergebnisse_container .woerterbuch__ergebnisse__header {
-          }
+    }
 
     .woerterbuch__ergebnisse_container a {
         text-decoration: none;
-    }
-
-    .woerterbuch__ergebnisse_container a:hover {
-        color: #B22E2F;
     }
 
     .woerterbuch__ergebnisse__body--container {
         max-height: 25rem;
         overflow-y: scroll;
         overflow-x: hidden;
-        /*   display: none;*/
         animation-name: fadeIn;
         animation-duration: 0.4s;
     }
 
-    @media only screen and (min-width: 640px) {
-        .woerterbuch {
-            padding: 4rem;
-        }
+    .woerterbuch__ergebnisse_container a:hover {
+        color: #B22E2F;
+    }
 
-        .woerterbuch__container {
-            padding: 2rem;
-        }
-
-        #result_container {
-            padding: 2rem;
-        }
-
-        .woerterbuch__ergebnisse__header--column-titles, .woerterbuch__ergebnisse__body--container-sub {
-            /*
-            display: flex;
-            justify-content: space-between;
-            */
-            text-align: left;
-            padding: 0.5rem;
-        }
-
-        .woerterbuch__ergebnisse__body--result-lemma, .woerterbuch__ergebnisse__header--column-titles__lemma {
-            width: 30%;
-        }
-
-        .woerterbuch__ergebnisse__header--column-titles__wortart, .woerterbuch__ergebnisse__body--result-wortart {
-            width: 10%;
-            display: inline-block;
-        }
-
-        .woerterbuch__ergebnisse__header--column-titles__bedeutung,
-        .woerterbuch__ergebnisse__body--result-bedeutung {
-            width: 40%;
-        }
+    .woerterbuch__ergebnisse__body--result-wortart {
+        font-style: italic;
     }
 
     .woerterbuch__ergebnisse__header--column-titles, .woerterbuch__ergebnisse__body--result-row {
@@ -295,6 +240,15 @@
         overflow: hidden;
         text-align: left;
         padding: 0.25rem;
+    }
+
+    .woerterbuch__ergebnisse__body--result-lemma, .woerterbuch__ergebnisse__header--column-titles__lemma {
+        width: 30%;
+    }
+    .woerterbuch__ergebnisse__body--container-sub {
+        line-height: 1rem;
+        padding: 0.25rem;
+        margin: 0 auto 0 auto;
     }
 
     .woerterbuch__ergebnisse__body--container {
@@ -313,32 +267,22 @@
         background: #eee;
     }
 
-    .woerterbuch__ergebnisse__body--container-sub {
-        line-height: 1rem;
-        padding: 0.25rem;
-        margin: 0 auto 0 auto;
-    }
 
     .woerterbuch__ergebnisse__body--result-row:hover span {
         color: #B22E2F;
     }
 
 
+    .woerterbuch__ergebnisse__body--result-wortart {
+        color: #888;
+        font-size: 0.8rem;
+    }
     .woerterbuch__ergebnisse__body--result-bedeutung {
         display: inline-block;
         font-size: 0.8rem;
         line-height: 1rem;
         color: #000;
     }
-
-    .woerterbuch__ergebnisse__body--result-wortart {
-        color: #888;
-        font-size: 0.8rem;
-    }
-
-    /*    .woerterbuch__ergebnisse__body--result-wortart:hover {
-            color: #fff;
-        }*/
 
     .woerterbuch__ergebnisse__body--container {
         color: #fff;
@@ -349,9 +293,38 @@
         box-shadow: 0px 1px 3px #ddd;
     }
 
+    @media only screen and (min-width: 640px) {
+        .woerterbuch {
+            padding: 4rem;
+        }
+
+        .woerterbuch__container {
+            padding: 2rem;
+        }
+
+        .woerterbuch__ergebnisse__header--column-titles, .woerterbuch__ergebnisse__body--container-sub {
+            text-align: left;
+            padding: 0.5rem;
+        }
+
+        .woerterbuch__ergebnisse__body--container-sub a span {
+            line-height: 1.25rem;
+            font-size: 1.10rem;
+        }
+
+        .woerterbuch__ergebnisse__header--column-titles__wortart, .woerterbuch__ergebnisse__body--result-wortart {
+            width: 10%;
+            display: inline-block;
+        }
+
+        .woerterbuch__ergebnisse__header--column-titles__bedeutung,
+        .woerterbuch__ergebnisse__body--result-bedeutung {
+            width: 40%;
+        }
+    }
+
     @media only screen and (min-width: 1024px) {
         .woerterbuch__suche--input {
-            /*width: 70%;*/
             width: 100%;
         }
     }
